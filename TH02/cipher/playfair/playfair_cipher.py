@@ -5,7 +5,7 @@ class PlayFairCipher:
     def __init__(self):
         pass
 
-    def create_playfair_matrix(self, key):
+    def create_matrix(self, key):
         key = key.replace('J', 'I') # Replace J with I
         key = key.upper()
         key_set = set(key)
@@ -26,7 +26,7 @@ class PlayFairCipher:
                 if matrix[row][col] == letter:
                     return row, col
 
-    def playfair_encrypt(self, plain_text, key):
+    def playfair_encrypt(self, plain_text, matrix):
         # chuyen J thanh I trong van ban dau vao
         plain_text = plain_text.replace("J", "I")
         plain_text = plain_text.upper()
@@ -45,7 +45,7 @@ class PlayFairCipher:
                 encrypted_text += matrix[row1][col2] + matrix[row2][col1]
         return encrypted_text
 
-    def playfair_decrypt(self, cipher_text, key):
+    def playfair_decrypt(self, cipher_text, matrix):
         cipher_text = cipher_text.upper()
         decrypted_text = ''
         decrypted_text1 = ''
