@@ -32,28 +32,6 @@ class MyApp(QMainWindow):
         except requests.exceptions.RequestException as e:
             print("Error: %s" % e.message)
 
-
-    def call_api_decrypt(self):
-        url = "http://127.0.0.1:5000/api/caesar/decrypt"
-        payload = {
-            "cipher_text": self.ui.txt_ciphertext.toPlainText(),
-            "key": self.ui.txt_key.toPlainText()
-        }
-        try:
-            response = requests.post(url, json=payload)
-            if response.status_code == 200:
-                data = response.json()
-                self.ui.txt_plaintext.setText(data["decrypted message"])
-
-                msg = QMessageBox()
-                msg.setIcon(QMessageBox.Information)
-                msg.setText("Decrypted succesfully")
-                msg.exec_()
-            else:
-                print("Error while calling API")
-        except requests.exceptions.RequestException as e:
-            print("Error: %s" % e.message)
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MyApp()
