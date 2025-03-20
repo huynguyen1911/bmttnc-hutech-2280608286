@@ -31,7 +31,7 @@ class MyApp(QMainWindow):
                 print("Error")
         except requests.exceptions.RequestException as e:
             print("errol: %s"% e.encrypted_message)
-            
+
     def call_api_decrypt(self):
         url = "http://127.0.0.1:5000/api/caesar/decrypt"
         payload = {
@@ -57,6 +57,4 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MyApp()
     window.show()
-    sys.exit(app.exec_())
-            
-               
+    sys.exit(app.exec_())  
