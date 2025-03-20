@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow,QMessageBox
 from ui.caesar import Ui_MainWindow
 import requests
 
@@ -21,17 +21,16 @@ class MyApp(QMainWindow):
             response = requests.post(url, json=payload)
             if response.status_code == 200:
                 data = response.json()
-                self.ui.txt_ciphertext.setText(data["encrypted message"])
+                self.ui.txt_ciphertext.setPlainText(data['encrypted message'])
 
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Information)
-                msg.setText("Encrypted succesfully")
+                msg.setText("Encrypt successfully")
                 msg.exec_()
             else:
-                print("Error while calling API")
+                print("Error")
         except requests.exceptions.RequestException as e:
-            print("Error: %s" % e.message)
-
+            print("errol: %s"% e.encrypted_message)
 
     def call_api_decrypt(self):
         url = "http://127.0.0.1:5000/api/caesar/decrypt"
@@ -43,19 +42,19 @@ class MyApp(QMainWindow):
             response = requests.post(url, json=payload)
             if response.status_code == 200:
                 data = response.json()
-                self.ui.txt_plaintext.setText(data["decrypted message"])
+                self.ui.txt_plaintext.setPlainText(data['decrypted message'])
 
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Information)
-                msg.setText("Decrypted succesfully")
+                msg.setText("decrypt successfully")
                 msg.exec_()
             else:
-                print("Error while calling API")
+                print("Error")
         except requests.exceptions.RequestException as e:
-            print("Error: %s" % e.message)
+            print("errol: %s"% e.decrypted_message)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MyApp()
     window.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec_())  
